@@ -6,6 +6,7 @@
  * OR
  * gql-ts.cmd -f schema.json -o schema.ts -n
  * gql-ts.cmd -e http://localhost:62830/graphql -o schema.ts -c
+ * gql-ts -e http://localhost:57225/graphql -o cradle.ts -c -s '[{\"key\":\"char\",\"value\":\"string\"}]'
  */
 
 // import { readFileStr, writeFileStr } from "https://deno.land/std@v1.0.1/fs/mod.ts";
@@ -14,8 +15,8 @@
 // Due to SSL proxy, had to download the github branch with tag: v1.0.1
 import { readFileStr } from "../../deno-1.0.1/std/fs/read_file_str.ts";
 import { writeFileStr } from "../../deno-1.0.1/std/fs/write_file_str.ts";
-import IntrospectionQuery from "./introspectionQuery.ts";
-import { TypeElement } from "./introspectionQuery.d.ts";
+import IntrospectionQuery from "./introspection-query.ts";
+import { TypeElement } from "./introspection-schema.d.ts";
 
 if (Deno.version.deno !== "1.0.1") console.log(`[WARN] Your DENO version ${Deno.version.deno} may not be supported. Supported version is: 1.0.1.`);
 
@@ -40,6 +41,7 @@ let endpoint = "";
  * -i   prefix interfaces with I. Default true, setting this will turn off!
  * -c   creates classes that implendments interfaces. Default false
  * -e   GraphQL Introspection endpoint
+ * -s   adds custom Scalar types
  */
 let argIdx = 0;
 Deno.args.forEach((arg: string) => {
@@ -63,15 +65,32 @@ Deno.args.forEach((arg: string) => {
         case "-e":
             endpoint = Deno.args[argIdx + 1];
             break;
+        case "-s":
+            try {
+                //TODO: Only working in this format: "[{\"key\":\"char\",\"value\":\"string\"}]"
+                let scalarObj = JSON.parse(Deno.args[argIdx + 1]) as { key:string, value:string }[];
+
+                if (typeof(scalarObj) === "object") {
+                    scalarObj.forEach(i => {
+                        addCustomScalar(i.key, i.value);
+                    });
+                }
+                
+            } catch (error) {
+                console.error(error);
+            }
+            break;
         case "-h":
+        case "-?":
             console.log("\nusage: gql-ts.cmd [option]\n");
-            console.log("  -f  file path to schema.json");
-            console.log("  -o  file path to output");
-            console.log("  -n  include null option to members. [default = false]");
-            console.log("  -i  prefix interfaces with I. [default = true].");
-            console.log("  -c  creates classes that implendments interfaces. [default = false]");
-            console.log("  -e  graphql introspection endpoint");
-            console.log("  -h  help\n");
+            console.log("  -f       file path to schema.json");
+            console.log("  -o       file path to output");
+            console.log("  -n       include null option to members. [default = false]");
+            console.log("  -i       prefix interfaces with I. [default = true].");
+            console.log("  -c       creates classes that implendments interfaces. [default = false]");
+            console.log("  -e       graphql introspection endpoint");
+            console.log("  -s       adds custom Scalar types");
+            console.log("  -h | -?  help\n");
             console.log( "Examples:\n gql-ts -e http://localhost/graphql -o schema.ts -c\n");
             console.log( " gql-ts -f schema.json -o schema.ts -n\n");
             break;
@@ -114,6 +133,38 @@ function TypesBuilder(introspection: any): string {
         sb += `export declare namespace ${namespace} {\n`
 
     introspection.data["__schema"].types.forEach((t: TypeElement) => {
+        if (t.name.startsWith("Query")) {
+            //console.log(t.fields);
+            t.fields.forEach(f => {
+                //if (f.name === "aboutServer" || f.name === "groupPager") {
+                    if (f.type.kind === "OBJECT") {
+                        // build class header
+                        sbClass += `/**${f.description}*/\n`;
+                        sbClass += `export class ${f.name} extends `;
+                        sbClass += f.type.name + " {\n";
+                        if (f.args.length === 0) {
+                            sbClass += tab + "constructor() {\n";
+                        }
+                        else {
+                            //process args
+                            let args = new Array<string>();
+                            f.args.forEach(a => {
+                                //console.log(a.type);
+                                if (a.type.kind === "SCALAR") {
+                                    args.push(a.name + ": " + getType(a.type.name) + " | null");
+                                }
+                                else {
+                                    args.push(a.name + ": any");
+                                }
+                            });
+                            sbClass += tab + `constructor(${args.join(", ")}) {\n`;
+                        }
+                        sbClass += tab + tab + "super();\n";
+                        sbClass += tab + "}\n}\n";
+                    }
+                //}
+            })
+        }
 
         if (!t.name.startsWith("__", 0)) {// && t.name.indexOf('AboutServer') > -1) {
 
@@ -223,6 +274,7 @@ typeMapping.push({ key: "Boolean", value: "boolean" });
 typeMapping.push({ key: "Int", value: "number" });
 
 if (fileIn.trim() !== "" && fileOut.trim() !== "") {
+    //Deno.open(fileIn,).then(file => { });
     readFileStr(fileIn)
         .then((res: string) => {
             let obj = JSON.parse(res);
@@ -242,6 +294,7 @@ else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(qry)
     }).then( async (resp) => { 
         let txt = await resp.text();
@@ -253,6 +306,7 @@ else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
             }
         } catch (err) {
             console.error(err);
+            console.log(txt);
         }
     }).catch(err => {
         console.error(err);

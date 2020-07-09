@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "Deno Debugger",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": ["run", "--inspect-brk", "-A", "${file}"],
+            "port": 9229
+        }
+    ]
+}

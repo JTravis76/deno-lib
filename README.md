@@ -7,6 +7,7 @@ As of this writing, Deno 1.0 is out and much too discover and learn. Directory s
 
 * GQL-TS - this is a GraphQL to TypeScript conversion. Reads directly from a `schema.json` or from a GraphQL endpoint. 
     * **NOTE:** this is for Introspection Query _ONLY_!!
+* GQL-Builder - builds a GraphQL query using Linq-style expression in Typescript
 
 
 ## License

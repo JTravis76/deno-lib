@@ -21,18 +21,17 @@ export interface ISelectable<T> extends GraphQLBase {
     /** starts an Selectable object */
     select(func: Function): ISelectable<T>;
     /** Add variables to query/mutation 
-     * @param args String array of variables. EX: "$p1:Int", "$p2:String"
-     * TODO: add better strong-typing support
-     * TODO: variable needs (3) items; name, type, and value
+     * @param args array of variables
     */
-    variables(...args: string[]): ISelectable<T>;
+    variables(...args: any[]): ISelectable<T>;
+    variables2<TParams>(obj: TParams): ISelectable<T>;
     /** Add parameters to query/mutation */
     args(...params: any[]): ISelectable<T>;
 }
 
 export interface IGraphQlQuery {
     query: string | null;
-    variables: object | null;
+    variables: any | null;
     operationname: string | null;
 }
 

@@ -16,7 +16,7 @@ export function parseField(strExp: string): string {
             if (ast.body[0].expression.body.type === "BlockStatement") {
                 if (ast.body[0].expression.body.body[0].type === "ReturnStatement") {
                     if (ast.body[0].expression.body.body[0].argument.type === "ObjectExpression") {
-                        let activeKey1 = "";
+                        let activeKeyList1 = new Array<string>();
                         ast.body[0].expression.body.body[0].argument.properties.forEach((p: any) => {
                             if (p.value.type === "MemberExpression") {
 
@@ -27,11 +27,12 @@ export function parseField(strExp: string): string {
                                         if (p.key.name === p.value.property.name) stringBuilder += p.key.name;
                                         else stringBuilder += p.key.name + ":" + p.value.property.name;
                                         break;
-                                    
+
                                     case "MemberExpression":
                                         // process nested object (one-to-one)
                                         AppendGroup(p.value.object.property.name, p.value.property.name, p.key.name);
-                                        activeKey1 = p.value.object.property.name;
+                                        if (activeKeyList1.indexOf(p.value.object.property.name) === -1)
+                                            activeKeyList1.push(p.value.object.property.name);
                                         break;
                                     default:
                                         break;
@@ -48,12 +49,13 @@ export function parseField(strExp: string): string {
                                 //== Process nested objects
                                 if (p.value.arguments[0].type === "ArrowFunctionExpression") {
                                     if (p.value.arguments[0].body.body[0].type === "ReturnStatement") {
-                                        let activeKey2 = "";
+                                        let activeKeyList2 = new Array<string>();
                                         p.value.arguments[0].body.body[0].argument.properties.forEach((p: any) => {
                                             if (p.value.object.type === "MemberExpression" && p.value.property.type === "Identifier") {
                                                 // contains both
                                                 AppendGroup(p.value.object.property.name, p.value.property.name, p.key.name);
-                                                activeKey2 = p.value.object.property.name;
+                                                if (activeKeyList2.indexOf(p.value.object.property.name) === -1)
+                                                    activeKeyList2.push(p.value.object.property.name);
                                             }
                                             else {
                                                 if (stringBuilder.length > 0 && !stringBuilder.endsWith("{")) stringBuilder += ",";
@@ -66,16 +68,19 @@ export function parseField(strExp: string): string {
                                         //console.log(groups);
                                         groups.forEach(i => {
                                             let keys = Object.keys(i);
-                                            if (activeKey2 === keys[0]) {
+                                            if (activeKeyList2.indexOf(keys[0]) > -1) {
                                                 if (stringBuilder.length > 0) stringBuilder += ",";
                                                 stringBuilder += keys[0] + "{";
                                                 stringBuilder += i[keys[0]].join(",");
-                                            
+
                                                 stringBuilder += "}";
                                             }
                                         });
-                                        groups = groups.filter((z) => { 
-                                            if (z[activeKey2] === undefined) return z;
+                                        //== Remove items so we don't reprocess them again
+                                        groups = groups.filter((z) => {
+                                            activeKeyList2.forEach(k => {
+                                                if (z[k] === undefined) return z;
+                                            });
                                         });
                                     }
                                 }
@@ -85,19 +90,22 @@ export function parseField(strExp: string): string {
                             }
                         });
                         // Add nested one-to-one objects
-                        //console.log(groups);
+                        //console.log(groups, activeKeyList1);
                         groups.forEach(i => {
                             let keys = Object.keys(i);
-                            if (activeKey1 === keys[0]) {
+                            if (activeKeyList1.indexOf(keys[0]) > -1) {
                                 if (stringBuilder.length > 0) stringBuilder += ",";
                                 stringBuilder += keys[0] + "{";
                                 stringBuilder += i[keys[0]].join(",");
-                            
+
                                 stringBuilder += "}";
                             }
                         });
-                        groups = groups.filter((z) => { 
-                            if (z[activeKey1] === undefined) return z;
+                        //== Remove items so we don't reprocess them again
+                        groups = groups.filter((z: any) => {
+                            activeKeyList1.forEach(k => {
+                                if (z[k] === undefined) return z;
+                            });
                         });
                         // Close query statement
                         stringBuilder += "}";

@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 // Reserved word lists for various dialects of the language
 
 var reservedWords = {

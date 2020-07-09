@@ -86,6 +86,26 @@ class Selectable<T> implements ISelectable<T> {
     }
 
     get gql(): GraphQlQuery {
+        //= Variables
+        if (this._gql.variables !== null && this._gql.query !== null && this._gql.operationname !== null) {
+            let s = "";
+
+            Object.keys(this._gql.variables).forEach(k => {
+                if (s.length > 0) s += ",";
+
+                if (typeof(this._gql.variables[k]) === "number") {
+                    s += `$${k}:Int`;
+                }
+                if (typeof(this._gql.variables[k]) === "string") {
+                    s += `$${k}:String`;
+                }
+                // !! use the key for the argument params, NOT the value, those are stored in the variable object
+                this.arguments.push("$" + k);
+            });
+
+            this._gql.query = this._gql.query.replace(this._gql.operationname?.toString(), this._gql.operationname?.toString() + `(${s})`);
+        }
+
         //= Build argument list, if any
         this.arguments = getArguments(this._type, this.arguments);
 
@@ -101,22 +121,22 @@ class Selectable<T> implements ISelectable<T> {
     }
 
     /** Add variables to query/mutation 
-     * @param args String array of variables. EX: "$p1:Int", "$p2:String"
-     * TODO: add better strong-typing support
-     * TODO: variable needs (3) items; name, type, and value
+     * @param args array of variables.
     */
-    variables(...args: string[]): ISelectable<T> {
-        // if (this._gql.variables === null) this._gql.variables = {};
-        // let vari = [] as string[];
-        // args.forEach(a => {
-        //     let d1 = a.split(";");
-        //     vari.push(d1[0]);
-        //     let d2 = d1[0].split(":");
-        //     let p = JSON.parse(`{"${d2[0]}":"${d1[1]}"}`);
+    variables(...args: any[]): ISelectable<T> {
+        if (this._gql.variables === null) this._gql.variables = {};
 
-        //     Object.assign(this._gql.variables, p);
-        // });
-        // do the work when asking for object: this._gql.query = this._gql.query.replace(this._gql.operationname, this._gql.operationname + `(${vari.join(",")})`);
+        let idx = 1;
+        args.forEach(a => {
+            this._gql.variables[`p${idx}`] = a;
+            idx += 1;
+        });
+        return this;
+    }
+    variables2<TParam>(obj: TParam): ISelectable<T> {
+        if (this._gql.variables === null) this._gql.variables = {};
+        // TODO: take the key pair and build out variables
+        console.log(obj);
         return this;
     }
 
@@ -161,7 +181,10 @@ function getArguments(object: Object, params: any[]): Array<string> {
                 arr.forEach(i => {
                     let type = typeof(params[idx]);
                     if (type === "string") {
-                        a.push(`${i}:"${params[idx]}"`);
+                        if (params[idx].startsWith("$")) //<- is it a variables??
+                            a.push(`${i}:${params[idx]}`);
+                        else
+                             a.push(`${i}:"${params[idx]}"`);   
                     }
                     else if (type === "number" || type === "boolean") {
                         a.push(`${i}:${params[idx]}`);

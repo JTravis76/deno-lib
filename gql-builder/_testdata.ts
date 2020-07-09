@@ -49,6 +49,80 @@ export class Department {
 
 //== This was built using gql-ts
 
+/**User details*/
+export interface IUser {
+    id: number | null;
+    ntUsername: string | null;
+    fullname: string | null;
+    email: string | null;
+    ntDescription: string | null;
+    adsCreateDate: string | Date | null;
+    deleteMark: number | null;
+    badge: string | null;
+    phone: string | null;
+}
+/**User details*/
+export class User2 implements IUser {
+    constructor() {
+        this.id = null;
+        this.ntUsername = null;
+        this.fullname = null;
+        this.email = null;
+        this.ntDescription = null;
+        this.adsCreateDate = null;
+        this.deleteMark = null;
+        this.badge = null;
+        this.phone = null;
+    }
+    id: number | null;
+    ntUsername: string | null;
+    fullname: string | null;
+    email: string | null;
+    ntDescription: string | null;
+    adsCreateDate: string | Date | null;
+    deleteMark: number | null;
+    badge: string | null;
+    phone: string | null;
+}
+/***/
+export interface IUserInfo {
+    username: string | null;
+    title: string | null;
+    bio: string | null;
+}
+/***/
+export class UserInfo implements IUserInfo {
+    constructor() {
+        this.username = null;
+        this.title = null;
+        this.bio = null;
+    }
+    username: string | null;
+    title: string | null;
+    bio: string | null;
+}
+/**All things about me*/
+export interface IAboutMe {
+    userInfo: IUserInfo;
+    roles: string[] | null;
+    user: IUser;
+}
+/**All things about me*/
+export class AboutMe implements IAboutMe {
+    constructor() {
+        this.userInfo = new UserInfo();
+        this.roles = null;
+        this.user = new User2();
+    }
+    userInfo: IUserInfo;
+    roles: string[] | null;
+    user: IUser;
+}
+export class aboutMe extends AboutMe {
+    constructor() {
+        super();
+    }
+}
 /**All things about API*/
 export interface IAboutServer {
     version: string | null;

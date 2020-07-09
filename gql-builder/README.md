@@ -14,10 +14,10 @@ deno test --allow-net _test.ts
 * [Query] One-to-many nested fields
 * [Query] Alias field names
 * [Query] queries with arguments
+* [Query] queries with variables
 * Execute function with Fetch Api
 
 to be continue...
 
 * mutations
-* variables
 * fragments

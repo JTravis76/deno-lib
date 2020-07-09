@@ -7,6 +7,6 @@ export default class GraphQlQuery implements IGraphQlQuery {
         this.operationname = "";
     }
     public query: string | null;
-    public variables: object | null;
+    public variables: any | null;
     public operationname: string | null;
 }

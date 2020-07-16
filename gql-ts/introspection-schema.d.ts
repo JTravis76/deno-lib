@@ -1,3 +1,9 @@
+export interface Introspection {
+    errors: any[];
+    data: {
+        "__schema": Schema
+    };
+}
 export interface Schema
 {
     queryType: TypeElement;

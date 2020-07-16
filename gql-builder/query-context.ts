@@ -26,7 +26,7 @@ export class QueryContext implements IQueryable {
     /** starts an Mutation statement 
      * @param name operation name
     */
-    mutation<T>(type: { new(): T }, name: string): ISelectable<T> {
+    mutation<T>(type: new (...args: any[]) => T, name: string): ISelectable<T> {
         this._gql.query = `mutation ${name}{`;
         this._gql.operationname = name;
 
@@ -76,13 +76,13 @@ class Selectable<T> implements ISelectable<T> {
     private _gql: GraphQlQuery;
     private _type: T;
     private funcString: string;
-    private arguments: Array<string>;
+    private arguments: Array<any>;
     
     constructor(type: T, gql: GraphQlQuery) {
         this._gql = gql;
         this._type = type;
         this.funcString = "";
-        this.arguments = new Array<string>();
+        this.arguments = new Array<any>();
     }
 
     get gql(): GraphQlQuery {
@@ -93,6 +93,10 @@ class Selectable<T> implements ISelectable<T> {
             Object.keys(this._gql.variables).forEach(k => {
                 if (s.length > 0) s += ",";
 
+                if (this._gql.variables[k] === null) {
+                    //TODO: instead of using constructor, should use property members
+                    s += `$${k}:String`;
+                }
                 if (typeof(this._gql.variables[k]) === "number") {
                     s += `$${k}:Int`;
                 }
@@ -135,8 +139,13 @@ class Selectable<T> implements ISelectable<T> {
     }
     variables2<TParam>(obj: TParam): ISelectable<T> {
         if (this._gql.variables === null) this._gql.variables = {};
-        // TODO: take the key pair and build out variables
-        console.log(obj);
+    
+        // take the key pair and build out variables
+        Object.keys(obj).forEach(s => {
+            let o = obj as unknown as any;
+            this._gql.variables[s] = o[s];
+        });
+
         return this;
     }
 
@@ -180,9 +189,11 @@ function getArguments(object: Object, params: any[]): Array<string> {
             if (arr.length === params.length) {
                 arr.forEach(i => {
                     let type = typeof(params[idx]);
+
                     if (type === "string") {
-                        if (params[idx].startsWith("$")) //<- is it a variables??
+                        if (params[idx].startsWith("$")) { //<- is it a variables??
                             a.push(`${i}:${params[idx]}`);
+                        }
                         else
                              a.push(`${i}:"${params[idx]}"`);   
                     }
@@ -197,7 +208,7 @@ function getArguments(object: Object, params: any[]): Array<string> {
                 return a;
             }
             else {
-                console.warn("[WARN] missing parameters");
+                console.warn("[WARN] incorrect list of parameters");
             }
         }
     }

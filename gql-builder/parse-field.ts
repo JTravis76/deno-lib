@@ -77,11 +77,13 @@ export function parseField(strExp: string): string {
                                             }
                                         });
                                         //== Remove items so we don't reprocess them again
-                                        groups = groups.filter((z) => {
-                                            activeKeyList2.forEach(k => {
-                                                if (z[k] === undefined) return z;
-                                            });
-                                        });
+                                        // groups = groups.filter((z: any) => {
+                                        //     let a = [] as any[];
+                                        //     activeKeyList2.forEach(k => {
+                                        //         if (z[k] === undefined ) a.push(z);
+                                        //     });
+                                        //     return a;
+                                        // });
                                     }
                                 }
 
@@ -102,11 +104,13 @@ export function parseField(strExp: string): string {
                             }
                         });
                         //== Remove items so we don't reprocess them again
-                        groups = groups.filter((z: any) => {
-                            activeKeyList1.forEach(k => {
-                                if (z[k] === undefined) return z;
-                            });
-                        });
+                        groups = [];
+                        // console.log(groups);
+                        // groups = groups.filter((z: any) => {
+                        //     activeKeyList1.forEach(k => {
+                        //         if (z[k] === undefined) return z;
+                        //     });
+                        // });
                         // Close query statement
                         stringBuilder += "}";
                     }

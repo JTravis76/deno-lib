@@ -1,6 +1,6 @@
 /// <reference path="../deno.d.ts" />
 import {assert, fail, assertEquals} from "../../deno-1.0.1/std/testing/asserts.ts"; //"https://deno.land/std/testing/asserts.ts";
-import { User, Roles, aboutServer, groupPager, aboutMe, IAboutMe } from "./_testdata.ts";
+import { User, Roles, aboutServer, groupPager, groupPagerArguments, aboutMe, IAboutMe, group } from "./_testdata.ts";
 import { QueryContext } from "./mod.ts";
 
 //TODO: acorn throw error when parsing `Roles: x.Roles?.some((z: Roles) => {` due to the question mark
@@ -14,7 +14,7 @@ import { QueryContext } from "./mod.ts";
 //     return new Array<any>();
 // };
 
-Deno.test("build complex nested GQL query", () => {
+Deno.test("build complex nested query, both one-to-one & one-to-many", () => {
     const db = new QueryContext();
 
     let gql = db.query(User,"GetUserRoles")
@@ -83,8 +83,7 @@ Deno.test("[Intergration] Fetch simple query", async (): Promise<void> => {
         });
 });
 
-//= !! Make sure to await all promises returned from Deno APIs before
-Deno.test("[Intergration] Fetch query with arguments", async (): Promise<void> => {
+Deno.test("[Intergration] Query with arguments", async (): Promise<void> => {
     const db = new QueryContext();
     let gql = db.query(groupPager, "GrpPager")
         .select((x: groupPager) => {
@@ -106,8 +105,7 @@ Deno.test("[Intergration] Fetch query with arguments", async (): Promise<void> =
         });
 });
 
-//= !! Make sure to await all promises returned from Deno APIs before
-Deno.test("[Intergration] Fetch query with variables", async (): Promise<void> => {
+Deno.test("[Intergration] Query with variables", async (): Promise<void> => {
     const db = new QueryContext();
     let gql = db.query(groupPager, "GrpPager")
         .select((x: groupPager) => {
@@ -134,20 +132,7 @@ Deno.test("[Intergration] Fetch query with variables", async (): Promise<void> =
         });
 });
 
-//= !! Make sure to await all promises returned from Deno APIs before
-Deno.test("[Intergration] Fetch query with variables2", async (): Promise<void> => {
-
-    class groupPagerParams {
-        constructor() {
-            this.page = 1;
-            this.pagesize = 10;
-            this.search = "";
-        }
-        page: number | null;
-        pagesize: number | null;
-        search: string | null;
-    }
-
+Deno.test("[Intergration] Query with variables2", async (): Promise<void> => {
     const db = new QueryContext();
     let gql = db.query(groupPager, "GrpPager")
         .select((x: groupPager) => {
@@ -156,21 +141,45 @@ Deno.test("[Intergration] Fetch query with variables2", async (): Promise<void> 
                 pageCount: x.pageCount
             }
         })
-        //.variables1(1, 10, "soft")
-        .variables2<groupPagerParams>({ page: 1, pagesize: 10, search: "" })
+        //.variables2<groupPagerArguments>({ page: 1, pagesize: 10, search: "" })
+        .variables2<groupPagerArguments>(new groupPagerArguments()) // NOTE: been sure to preset any values in constructor
         .gql;
-    
-    // if (gql.query !== null)
-    //     assert(gql.query.indexOf("$p1") > -1, "variables are missing in query statement");
 
-    // assert(typeof(gql.variables["$p1"]) !== "number", "first variable is not a number");
+    if (gql.query !== null)
+        assert(gql.query.indexOf("$page") > -1, "variables are missing in query statement");
 
-    // await db.execute<groupPager>(gql)
-    //     .then(d => {
-    //         assert(d.total !== null, "query results are null");
-    //         assert(d.total > 0, "no records were returned");
-    //         assertEquals(d, { total: 1, pageCount: 1 }, "returned object is not expected");
-    //     }).catch(err => {
-    //         fail(err);
-    //     });
+    assert(typeof(gql.variables["$page"]) !== "number", "first variable is not a number");
+
+    await db.execute<groupPager>(gql)
+        .then(d => {
+            assert(d.total !== null, "query results are null");
+            assert(d.total > 0, "no records were returned");
+            assertEquals(d, { total: 1, pageCount: 1 }, "returned object is not expected");
+        }).catch(err => {
+            fail(err);
+        });
+});
+
+Deno.test("[Intergration] Mutation with arguments", async (): Promise<void> => {
+    const db = new QueryContext();
+    let gql = db.mutation(group, "UpdateGRP")
+        .select((x: group) => {
+            return {
+                GroupName: x.GroupName
+            }
+        })
+        .args(1, "Software Developers", false, 1, null)
+        .gql;
+
+    //console.log("\n" + gql.query);
+
+    await db.execute<group>(gql)
+        .then(d => {
+            console.log(d);
+            // assert(d.total !== null, "query results are null");
+            // assert(d.total > 0, "no records were returned");
+            // assertEquals(d, { total: 1, pageCount: 1 }, "returned object is not expected");
+        }).catch(err => {
+            fail(err);
+        });
 });

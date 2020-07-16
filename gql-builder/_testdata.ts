@@ -149,7 +149,7 @@ export class aboutServer extends AboutServer {
 /***/
 export interface IGroup {
     id: number | null;
-    name: string | null;
+    GroupName: string | null;
     createdBy: string | null;
     createdDate: string | Date | null;
     updatedBy: string | null;
@@ -163,7 +163,7 @@ export interface IGroup {
 export class Group implements IGroup {
     constructor() {
         this.id = null;
-        this.name = null;
+        this.GroupName = null;
         this.createdBy = null;
         this.createdDate = null;
         this.updatedBy = null;
@@ -173,7 +173,7 @@ export class Group implements IGroup {
         this.countOfMembers = null;
     }
     id: number | null;
-    name: string | null;
+    GroupName: string | null;
     createdBy: string | null;
     createdDate: string | Date | null;
     updatedBy: string | null;
@@ -232,6 +232,23 @@ export class GroupPagination implements IGroupPagination {
 /**Pagination. [defaults: page = 1, pagesize = 10]*/
 export class groupPager extends GroupPagination {
     constructor(page: number | null, pagesize: number | null, search: string | null) {
+        super();
+    }
+}
+/**Arguments for the groupPager*/
+export class groupPagerArguments {
+    constructor() {
+        this.page = 1;
+        this.pagesize = 25;
+        this.search = null;
+    }
+    page: number | null;
+    pagesize: number | null;
+    search: string | null;
+}
+
+export class group extends Group {
+    constructor(groupId: number | null, groupName: string | null, isDeleted: boolean | null, groupTypeId: number | null, groupMember: GroupMember[] | null) {
         super();
     }
 }

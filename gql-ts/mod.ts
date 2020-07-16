@@ -6,24 +6,19 @@
  * OR
  * gql-ts.cmd -f schema.json -o schema.ts -n
  * gql-ts.cmd -e http://localhost:62830/graphql -o schema.ts -c
- * gql-ts -e http://localhost:57225/graphql -o cradle.ts -c -s '[{\"key\":\"char\",\"value\":\"string\"}]'
+ * gql-ts -e http://localhost:57225/graphql -o foo.ts -c -s '[{\"key\":\"char\",\"value\":\"string\"}]'
  */
 
-// import { readFileStr, writeFileStr } from "https://deno.land/std@v1.0.1/fs/mod.ts";
-// import { readFileStr, writeFileStr } from "../../deno-1.0.1/std/fs/mod.ts";
-
-// Due to SSL proxy, had to download the github branch with tag: v1.0.1
-import { readFileStr } from "../../deno-1.0.1/std/fs/read_file_str.ts";
-import { writeFileStr } from "../../deno-1.0.1/std/fs/write_file_str.ts";
 import IntrospectionQuery from "./introspection-query.ts";
-import { TypeElement } from "./introspection-schema.d.ts";
+import { TypeElement, Introspection } from "./introspection-schema.d.ts";
 
-if (Deno.version.deno !== "1.0.1") console.log(`[WARN] Your DENO version ${Deno.version.deno} may not be supported. Supported version is: 1.0.1.`);
+if (Deno.version.deno !== "1.0.5") console.log(`[WARN] Your DENO version ${Deno.version.deno} may not be supported. Supported version is: 1.0.5.`);
 
 let typeMapping = [] as { key: string, value: string }[];
 addCustomScalar("Byte", "number");
 addCustomScalar("Decimal", "number");
 addCustomScalar("Float", "number");
+addCustomScalar("Double", "number");
 
 // == options section
 let fileIn = "";
@@ -116,58 +111,77 @@ function getType(name: string): string {
  * @param key custom type name to bind, normally a C# type
  * @param value Typescript equivalent type
  */
-function addCustomScalar(key: string, value: string) {
+export function addCustomScalar(key: string, value: string) {
     typeMapping.push({key, value});
 }
 
 /** Builds the Interface and Class types
- * @param introspection Introspection query json object
+ * @param introspection Introspection query object
  * @returns a string output
  */
-function TypesBuilder(introspection: any): string {
-    let sb = "";
-    let tab = "    ";
-    let sbClass = "";
+function TypesBuilder(introspection: Introspection): string {
+    let sb = "";            // main string builder
+    let tab = "    ";       // set the indented spaces
+    let queryClass = "";    // string builder for the query classes
+    let sbClass = "";       // string builder for the class object
+    let argumentClass = ""  // string builder for the argument class;
 
     if (namespace.trim() !== "")
         sb += `export declare namespace ${namespace} {\n`
 
-    introspection.data["__schema"].types.forEach((t: TypeElement) => {
+    introspection.data["__schema"].types.forEach(t => {
         if (t.name.startsWith("Query")) {
             //console.log(t.fields);
             t.fields.forEach(f => {
-                //if (f.name === "aboutServer" || f.name === "groupPager") {
+                //console.log(f.name);
+                //if (f.name === "groupPager") {
                     if (f.type.kind === "OBJECT") {
                         // build class header
-                        sbClass += `/**${f.description}*/\n`;
-                        sbClass += `export class ${f.name} extends `;
-                        sbClass += f.type.name + " {\n";
-                        if (f.args.length === 0) {
-                            sbClass += tab + "constructor() {\n";
-                        }
-                        else {
-                            //process args
-                            let args = new Array<string>();
-                            f.args.forEach(a => {
-                                //console.log(a.type);
-                                if (a.type.kind === "SCALAR") {
-                                    args.push(a.name + ": " + getType(a.type.name) + " | null");
-                                }
-                                else {
-                                    args.push(a.name + ": any");
-                                }
-                            });
-                            sbClass += tab + `constructor(${args.join(", ")}) {\n`;
-                        }
-                        sbClass += tab + tab + "super();\n";
-                        sbClass += tab + "}\n}\n";
+                        queryClass += `/**${f.description}*/\nexport class ${f.name} extends ${f.type.name} {\n`;
                     }
+                    if (f.type.kind === "LIST") {
+                        queryClass += `/**${f.description}*/\nexport class ${f.name} extends ${f.type.ofType.name} {\n`;
+                    }
+
+                    if (f.args.length === 0) {
+                        queryClass += tab + "constructor() {\n";
+                    }
+                    else {
+                        //process args
+                        let args = new Array<string>();
+                        f.args.forEach(a => {
+                            //console.log(a.type);
+                            if (a.type.kind === "SCALAR") {
+                                args.push(a.name + ": " + getType(a.type.name) + " | null");
+                            }
+                            else {
+                                args.push(a.name + ": any");
+                            }
+                        });
+                        queryClass += tab + `constructor(${args.join(", ")}) {\n`;
+                        // Build an argument class to assist with strong-typing
+                        // also this will start a NEW string
+                        argumentClass = `/**Arguments for the ${f.name}*/\n`;
+                        argumentClass += `export class ${f.name}Arguments {\n${tab}constructor() {\n`;
+                        f.args.forEach(a => {
+                            argumentClass += `${tab}${tab}this.${a.name} = null;\n`;
+                        });
+                        argumentClass += `${tab}}\n`;
+                        args.forEach(a => {
+                            argumentClass += `${tab}${a};\n`;
+                        });
+                        argumentClass += "}\n";
+                    }
+                    queryClass += tab + tab + "super();\n";
+                    queryClass += tab + "}\n}\n";
+                    //add argument class to main string builder
+                    queryClass += argumentClass;
+                    argumentClass = ""; //flush it so we don't keep writing it
                 //}
             })
         }
 
-        if (!t.name.startsWith("__", 0)) {// && t.name.indexOf('AboutServer') > -1) {
-
+        if (!t.name.startsWith("__", 0)) { // && t.name.indexOf('GroupPagination') > -1) {
             // Check for missing Scalar and warn
             if (t.kind === "SCALAR") {
                 if (getType(t.name) === "any") 
@@ -176,14 +190,12 @@ function TypesBuilder(introspection: any): string {
 
             if (t.kind === "OBJECT") {
                 // build class header
-                sbClass += `/**${t.description}*/\n`;
-                sbClass += `export class ${t.name} implements `;
+                sbClass += `/**${t.description}*/\nexport class ${t.name} implements `;
                 sbClass += addIPrefix ? "I" : "";
                 sbClass += t.name + " {\n";
 
                 //build interface header
-                sb += `/**${t.description}*/\n`;
-                sb += "export interface ";
+                sb += `/**${t.description}*/\nexport interface `;
                 sb += addIPrefix ? "I" : "";
                 sb += t.name + " {\n";
 
@@ -259,6 +271,9 @@ function TypesBuilder(introspection: any): string {
 
     });
 
+    // insert the query class last so the classes are added BEFORE we start using them
+    sb += queryClass;
+
     if (namespace !== "")
         sb += "}"
 
@@ -274,12 +289,11 @@ typeMapping.push({ key: "Boolean", value: "boolean" });
 typeMapping.push({ key: "Int", value: "number" });
 
 if (fileIn.trim() !== "" && fileOut.trim() !== "") {
-    //Deno.open(fileIn,).then(file => { });
-    readFileStr(fileIn)
+    Deno.readTextFile(fileIn)
         .then((res: string) => {
             let obj = JSON.parse(res);
             let str = TypesBuilder(obj);
-            writeFileStr(fileOut, str);
+            Deno.writeTextFile(fileOut, str);
         })
         .catch((err: any) => {
             console.log(err);
@@ -302,7 +316,7 @@ else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
             let obj = JSON.parse(txt);
             let str = TypesBuilder(obj);
             if (fileOut.trim() !== "") {
-                writeFileStr(fileOut, str);
+                Deno.writeTextFile(fileOut, str);
             }
         } catch (err) {
             console.error(err);

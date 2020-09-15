@@ -1,6 +1,7 @@
 # GraphQL Introspection to Typescript Types
 GQL-TS is a GraphQL to TypeScript conversion. Reads directly from a `schema.json` or from a GraphQL endpoint. 
 
+
 > **NOTE:** this is for Introspection Query _ONLY_!!
 
 ## Permissions
@@ -9,11 +10,32 @@ GQL-TS is a GraphQL to TypeScript conversion. Reads directly from a `schema.json
 * --allow-env
 * --allow-net
 
-## Running the App
-```
-deno run --allow-read --allow-write --allow-env --allow-net mod.ts
+## Deno Example
+If you like to use the GQL-TS CLI, see next section.
 
-deno run --allow-read --allow-write --allow-env --allow-net mod.ts -f schema.json -o schema.ts
+First, create a Typescript file in your project and copy the content below. Be sure to adjust the properties to your spec.
+
+```ts
+import GQLTS from "https://raw.githubusercontent.com/JTravis76/deno-lib/master/gql-ts/mod.ts";
+
+let gqlts = new GQLTS();
+gqlts.Endpoint = "http://localhost:57225/graphql";
+gqlts.SchemaFile = "";
+gqlts.Class = true;
+gqlts.Interface = true;
+gqlts.Nullable = true;
+gqlts.OutFile = "C:\\WebApp1\\src\\schema.ts";
+gqlts.AddScalar("char", "string");
+gqlts.AddScalar("Float", "number");
+
+gqlts.Execute();
+```
+
+## Running the CLI
+```
+deno run --allow-read --allow-write --allow-env --allow-net cli.ts
+
+deno run --allow-read --allow-write --allow-env --allow-net cli.ts -f schema.json -o schema.ts
 ```
 
 Or use the CLI
@@ -38,6 +60,8 @@ Examples:
 ## Issues & Bugs
 
 When using nuget EntityGraph v0.60, the generated introspection schema has a bug.
+
+> !! This was corrected in version 0.64.0 as of 2020-09-15
 
 The following schema snippet, the introspection is showing a `NON_NULL` type for sdgCount. The problem is that the sub type; `FLOAT` is not considered an `OBJECT` but a `SCALAR`.  
 

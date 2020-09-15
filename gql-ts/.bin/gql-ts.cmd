@@ -9,7 +9,7 @@ IF EXIST "%dp0%\deno.exe" (
   SET PATHEXT=%PATHEXT:;.TS;=;%
 )
 
-"%_prog%"  "run" "--allow-read" "--allow-write" "--allow-env" "--allow-net" "%dp0%\..\mod.ts" %*
+"%_prog%"  "run" "--allow-read" "--allow-write" "--allow-env" "--allow-net" "%dp0%\..\cli.ts" %*
 ENDLOCAL
 EXIT /b %errorlevel%
 :find_dp0

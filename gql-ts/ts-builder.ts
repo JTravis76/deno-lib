@@ -120,10 +120,24 @@ export function TypesBuilder(introspection: Introspection, opt: { namespace: str
                     con += `${tab}${tab}this.${f.name} = `;
 
                     //TODO: need more work, could be a non-nullable string or object :?
+                    // TODO: EntityGraphQL - this project is forcing a non-null for ALL scalar-type object, minus String
+                    // if (t.name === "AboutServer" && f.name === "versionDate") {
+                    //     console.log(f.type);
+                    // }
                     if (f.type.kind !== "NON_NULL")
                         con += `null;\n`;
                     else {
-                        con += `0;\n`;
+                        // for NON_NULL types, fetch default scalar/object type
+                        switch(f.type.ofType.name) {
+                            case "Boolean":
+                                con += `false\n`;
+                                break;
+                            case "Date":
+                                con += `""\n`;
+                                break;
+                            default:
+                                con += `0;\n`;
+                        }
                     }
 
                     // Assign object types

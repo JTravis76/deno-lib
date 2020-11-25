@@ -19,6 +19,7 @@ let addNull = false;
 let addIPrefix = true;
 let buildClasses = false;
 let endpoint = "";
+let headersString = "";
 const namespace = "";
 
 /**
@@ -39,6 +40,9 @@ Deno.args.forEach((arg: string) => {
         case "-o":
             fileOut = Deno.args[argIdx + 1];
             break;
+        case "-H":
+            headersString = Deno.args[argIdx + 1];
+            break;
         case "-n":
             addNull = true;
             break;
@@ -49,20 +53,20 @@ Deno.args.forEach((arg: string) => {
             buildClasses = true;
             addNull = true;
             break;
-        case "-e":
+    case "-e":
             endpoint = Deno.args[argIdx + 1];
             break;
         case "-s":
             try {
-                //TODO: Only working in this format: "[{\"key\":\"char\",\"value\":\"string\"}]"
-                const scalarObj = JSON.parse(Deno.args[argIdx + 1]) as { key:string, value:string }[];
+                Deno.args[argIdx + 1].trim().split(',').forEach(pair => {
+                    const items = pair.split('=');
+                    const key = items[0];
+                    const value = items[1];
 
-                if (typeof(scalarObj) === "object") {
-                    scalarObj.forEach(i => {
-                        addScalar(i.key, i.value);
-                    });
-                }
-                
+                    if (key != '') {
+                        addScalar(key, value);
+                    }
+                })
             } catch (error) {
                 console.error(error);
             }
@@ -76,7 +80,8 @@ Deno.args.forEach((arg: string) => {
             console.log("  -i       prefix interfaces with I. [default = true].");
             console.log("  -c       creates classes that implendments interfaces. [default = false]");
             console.log("  -e       graphql introspection endpoint");
-            console.log("  -s       adds custom Scalar types");
+            console.log("  -H       Add headers to the introspection endpoint given a comma separated list of key=value pairs");
+            console.log("  -s       adds custom Scalar types given a comma separated list of key=value pairs");
             console.log("  -h | -?  help\n");
             console.log( "Examples:\n gql-ts -e http://localhost/graphql -o schema.ts -c\n");
             console.log( " gql-ts -f schema.json -o schema.ts -n\n");
@@ -116,11 +121,24 @@ if (fileIn.trim() !== "" && fileOut.trim() !== "") {
 else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
     const qry = IntrospectionQuery();
 
+    const headers: { [key: string]: string } = {};
+    
+    headersString.trim().split(',').forEach(header => {
+        const items = header.split('=');
+        const key = items[0];
+        const value = items[1];
+
+        if (key != "") {
+            headers[key] = value;
+        }
+    })
+
     fetch(endpoint, {
         method: "POST",
         cache: "no-cache",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            ...headers
         },
         credentials: 'include',
         body: JSON.stringify(qry)

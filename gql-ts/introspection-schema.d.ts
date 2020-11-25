@@ -1,4 +1,5 @@
 export interface Introspection {
+    // deno-lint-ignore no-explicit-any
     errors: any[];
     data: {
         "__schema": Schema

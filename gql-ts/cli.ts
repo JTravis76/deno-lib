@@ -18,8 +18,8 @@ let fileOut = "./schema.ts";
 let addNull = false;
 let addIPrefix = true;
 let buildClasses = false;
-let namespace = "";
 let endpoint = "";
+const namespace = "";
 
 /**
  * -f   file path to schema.json
@@ -55,7 +55,7 @@ Deno.args.forEach((arg: string) => {
         case "-s":
             try {
                 //TODO: Only working in this format: "[{\"key\":\"char\",\"value\":\"string\"}]"
-                let scalarObj = JSON.parse(Deno.args[argIdx + 1]) as { key:string, value:string }[];
+                const scalarObj = JSON.parse(Deno.args[argIdx + 1]) as { key:string, value:string }[];
 
                 if (typeof(scalarObj) === "object") {
                     scalarObj.forEach(i => {
@@ -98,22 +98,23 @@ addScalar("Int", "number");
 if (fileIn.trim() !== "" && fileOut.trim() !== "") {
     Deno.readTextFile(fileIn)
         .then((res: string) => {
-            let opt = {
+            const opt = {
                 namespace: namespace,
                 buildClasses: buildClasses,
                 addIPrefix: addIPrefix,
                 addNull: addNull
             };
-            let obj = JSON.parse(res);
-            let str = TypesBuilder(obj, opt);
+            const obj = JSON.parse(res);
+            const str = TypesBuilder(obj, opt);
             Deno.writeTextFile(fileOut, str);
         })
+        // deno-lint-ignore no-explicit-any
         .catch((err: any) => {
             console.log(err);
         });
 }
 else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
-    let qry = IntrospectionQuery();
+    const qry = IntrospectionQuery();
 
     fetch(endpoint, {
         method: "POST",
@@ -124,16 +125,16 @@ else if (endpoint.trim() !== "" && fileOut.trim() !== "") {
         credentials: 'include',
         body: JSON.stringify(qry)
     }).then( async (resp) => { 
-        let txt = await resp.text();
+        const txt = await resp.text();
         try {
-            let opt = {
+            const opt = {
                 namespace: namespace,
                 buildClasses: buildClasses,
                 addIPrefix: addIPrefix,
                 addNull: addNull
             };
-            let obj = JSON.parse(txt);
-            let str = TypesBuilder(obj, opt);
+            const obj = JSON.parse(txt);
+            const str = TypesBuilder(obj, opt);
             if (fileOut.trim() !== "") {
                 Deno.writeTextFile(fileOut, str);
             }

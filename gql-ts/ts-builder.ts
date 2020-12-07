@@ -1,6 +1,6 @@
 import { Introspection } from "./introspection-schema.d.ts";
 
-let typeMapping = [] as { key: string, value: string }[];
+const typeMapping = [] as { key: string, value: string }[];
 
 /** Checks Scalar type and returns Typescript type 
  * @param name name to search on
@@ -32,7 +32,7 @@ export function addScalar(key: string, value: string) {
  */
 export function TypesBuilder(introspection: Introspection, opt: { namespace: string, buildClasses: boolean, addIPrefix: boolean, addNull: boolean }): string {
     let sb = "";            // main string builder
-    let tab = "    ";       // set the indented spaces
+    const tab = "    ";       // set the indented spaces
     let queryClass = "";    // string builder for the query classes
     let sbClass = "";       // string builder for the class object
     let argumentClass = ""  // string builder for the argument class;
@@ -59,7 +59,7 @@ export function TypesBuilder(introspection: Introspection, opt: { namespace: str
                     }
                     else {
                         //process args
-                        let args = new Array<string>();
+                        const args = new Array<string>();
                         f.args.forEach(a => {
                             //console.log(a.type);
                             if (a.type.kind === "SCALAR") {

@@ -20,6 +20,7 @@ export class GQLTS {
     public Nullable: boolean;
     public Namespace: string;
 
+    // deno-lint-ignore no-explicit-any
     public AddScalar(name: any, value: any): void {
         addScalar(name, value);
     }
@@ -37,22 +38,23 @@ export class GQLTS {
         if (this.SchemaFile.trim() !== "" && this.OutFile.trim() !== "") {
             Deno.readTextFile(this.SchemaFile)
                 .then((res: string) => {
-                    let opt = {
+                    const opt = {
                         namespace: this.Namespace,
                         buildClasses: this.Class,
                         addIPrefix: this.Interface,
                         addNull: this.Nullable
                     };
-                    let obj = JSON.parse(res);
-                    let str = TypesBuilder(obj, opt);
+                    const obj = JSON.parse(res);
+                    const str = TypesBuilder(obj, opt);
                     Deno.writeTextFile(this.OutFile, str);
                 })
+                // deno-lint-ignore no-explicit-any
                 .catch((err: any) => {
                     console.log(err);
                 });
         }
         else if (this.Endpoint.trim() !== "" && this.OutFile.trim() !== "") {
-            let qry = IntrospectionQuery();
+            const qry = IntrospectionQuery();
 
             fetch(this.Endpoint, {
                 method: "POST",
@@ -63,16 +65,16 @@ export class GQLTS {
                 credentials: 'include',
                 body: JSON.stringify(qry)
             }).then( async (resp) => { 
-                let txt = await resp.text();
+                const txt = await resp.text();
                 try {
-                    let opt = {
+                    const opt = {
                         namespace: this.Namespace,
                         buildClasses: this.Class,
                         addIPrefix: this.Interface,
                         addNull: this.Nullable
                     };
-                    let obj = JSON.parse(txt);
-                    let str = TypesBuilder(obj, opt);
+                    const obj = JSON.parse(txt);
+                    const str = TypesBuilder(obj, opt);
                     if (this.OutFile.trim() !== "") {
                         Deno.writeTextFile(this.OutFile, str);
                     }
@@ -84,7 +86,7 @@ export class GQLTS {
                 console.error(err);
             });
         }
-    };
+    }
 }
 
 export default GQLTS;

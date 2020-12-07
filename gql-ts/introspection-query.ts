@@ -6,7 +6,7 @@ export default () => {
     }
 }
  
-let introspectionQuery = `query IntrospectionQuery {
+const introspectionQuery = `query IntrospectionQuery {
     __schema {
         queryType { name }
         mutationType { name }

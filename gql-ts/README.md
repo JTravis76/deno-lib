@@ -33,9 +33,14 @@ gqlts.Execute();
 
 ## Running the CLI
 ```
-deno run --allow-read --allow-write --allow-env --allow-net cli.ts
+# Install CLI
+deno install --name gql-ts --allow-read --allow-write --allow-env --allow-net https://raw.githubusercontent.com/JTravis76/deno-lib/master/gql-ts/cli.ts
 
-deno run --allow-read --allow-write --allow-env --allow-net cli.ts -f schema.json -o schema.ts
+# Get help
+gql-ts --help
+
+# Compile schema
+gql-ts -f schema.json -o schema.ts
 ```
 
 Or use the CLI

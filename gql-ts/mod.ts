@@ -6,12 +6,14 @@ export class GQLTS {
     constructor() {
         this.Class = false;
         this.Endpoint = "";
+        this.Headers = {};
         this.Interface = true;
         this.Nullable = false;
         this.OutFile = "./schema.ts";
         this.SchemaFile = "";
         this.Namespace = "";
     }
+    public Headers: { [key: string]: string }
     public OutFile: string;
     public Endpoint: string;
     public SchemaFile: string;
@@ -60,7 +62,8 @@ export class GQLTS {
                 method: "POST",
                 cache: "no-cache",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    ...this.Headers
                 },
                 credentials: 'include',
                 body: JSON.stringify(qry)

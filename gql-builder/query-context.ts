@@ -4,8 +4,10 @@ import GraphQlQuery from "./graphql-query.ts";
 
 export class QueryContext implements IQueryable {
     private _gql: GraphQlQuery;
-    constructor() {
+    private _url: string;
+    constructor(url: string) {
         this._gql = new GraphQlQuery();
+        this._url = url;
     };
 
     /** starts an Query statement 
@@ -38,12 +40,12 @@ export class QueryContext implements IQueryable {
         // return new Promise((resolve, reject) => {
 
         //     // let request = new XMLHttpRequest();
-        //     // request.open("POST", "http://jeremytravis.azurewebsites.net/api/graphql");
+        //     // request.open("POST", "http://localhost/api/graphql");
         //     // request.setRequestHeader("Accept", "application/json");
         //     // request.setRequestHeader("Content-Type", "application/json");
         //     // request.send(JSON.stringify(gql));
 
-            return fetch("http://jeremytravis.azurewebsites.net/api/graphql", {
+            return fetch(this._url, {
                 method: "POST",
                 cache: "no-cache",
                 mode: "no-cors",

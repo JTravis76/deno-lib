@@ -1,0 +1,194 @@
+location,type,project,namespace,framework,references,hintpath
+./TestDir/ProjectA/Optima.Login.Services.csproj,ASP.NET MVC 5/C#,csproj,Optima.Login.Services,v4.5.2,"",""
+,,,,,"Codebook, Version=5.2.0.0, Culture=neutral, PublicKeyToken=071f2acc6b516d38, processorArchitecture=MSIL",..\..\..\..\Libraries\Codebook\bin\Codebook.dll
+,,,,,"GiftRAP.ClassFactory",..\..\..\..\Libraries\GiftRAP.ClassFactory\GiftRAP.ClassFactory\bin\GiftRAP.ClassFactory.dll
+,,,,,"GiftRAP.RO.Model",..\..\..\Rehab Optima\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Model\bin\GiftRAP.RO.Model.dll
+,,,,,"GiftRAP.RO.Services, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\Rehab Optima\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Services\bin\GiftRAP.RO.Services.dll
+,,,,,"Microsoft.CSharp",
+,,,,,"Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL",..\..\..\..\Libraries\NewtonsoftJson\6.0.4\Newtonsoft.Json.dll
+,,,,,"Optima.API.Security.Core",..\..\..\..\Libraries\Optima.API.Security.Core\Optima.API.Security.Core\bin\Optima.API.Security.Core.dll
+,,,,,"Optima.API.Security.MVC5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.API.Security.MVC5\Optima.API.Security.MVC5\bin\Optima.API.Security.MVC5.dll
+,,,,,"Optima.CryptoProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.CryptoProvider\Optima.CryptoProvider\bin\Optima.CryptoProvider.dll
+,,,,,"Optima.Model",..\..\..\..\Libraries\Optima.Model\Optima.Model\bin\Optima.Model.dll
+,,,,,"Optima.RO.API.Security.Core",..\..\..\Rehab Optima\Libraries\Optima.RO.API.Security.Core\Optima.RO.API.Security.Core\bin\Optima.RO.API.Security.Core.dll
+,,,,,"Optima.RO.API.Security.Interfaces",..\..\..\Rehab Optima\Libraries\Optima.RO.API.Security.Interfaces\Optima.RO.API.Security.Interfaces\bin\Optima.RO.API.Security.Interfaces.dll
+,,,,,"Optima.RO.API.Security.MVC5",..\..\..\Rehab Optima\Libraries\Optima.RO.API.Security.MVC5\Optima.RO.API.Security.MVC5\bin\Optima.RO.API.Security.MVC5.dll
+,,,,,"Optima.RO.OpenIDConnect",..\..\..\Rehab Optima\Libraries\Optima.RO.OpenIDConnect\bin\Optima.RO.OpenIDConnect.dll
+,,,,,"StructureMap",..\..\..\..\Libraries\StructureMap\StructureMap.dll
+,,,,,"System.Net.Http",
+,,,,,"System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebApi.Client\5.2.3\lib\net45\System.Net.Http.Formatting.dll
+,,,,,"System.Net.Http.WebRequest",
+,,,,,"System.Runtime.Serialization",
+,,,,,"System.Web.DynamicData",
+,,,,,"System.Web.Entity",
+,,,,,"System.Web.ApplicationServices",
+,,,,,"System.ComponentModel.DataAnnotations",
+,,,,,"System",
+,,,,,"System.Data",
+,,,,,"System.Core",
+,,,,,"System.Data.DataSetExtensions",
+,,,,,"System.Web.Extensions",
+,,,,,"System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebApi.Core\5.2.3\lib\net45\System.Web.Http.dll
+,,,,,"System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebApi.WebHost\5.2.3\lib\net45\System.Web.Http.WebHost.dll
+,,,,,"System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.Razor\3.2.0\lib\net45\System.Web.Razor.dll
+,,,,,"System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebPages\3.2.0\lib\net45\System.Web.WebPages.dll
+,,,,,"System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebPages\3.2.0\lib\net45\System.Web.WebPages.Deployment.dll
+,,,,,"System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL",..\..\..\..\Libraries\Microsoft\AspNet.WebPages\3.2.0\lib\net45\System.Web.WebPages.Razor.dll
+,,,,,"System.Xml.Linq",
+,,,,,"System.Drawing",
+,,,,,"System.Web",
+,,,,,"System.Xml",
+,,,,,"System.Configuration",
+,,,,,"System.Web.Services",
+,,,,,"System.EnterpriseServices",
+./TestDir/ProjectA/ProjectB/GiftRAP.RO.Client.vbproj,,vbproj,GiftRAP.Client,v4.5.2,"",""
+,,,,,", Culture=neutral, PublicKeyToken=c8526a021ef298ed, processorArchitecture=MSIL",..\..\..\..\Libraries\Flee\0.9.26.0\Lib\bin\Ciloci.Flee.dll
+,,,,,"CefSharp, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86",..\..\..\..\Libraries\CefSharp\CefSharp.Common.81.3.100\x86\CefSharp.dll
+,,,,,"CefSharp.Core, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86",..\..\..\..\Libraries\CefSharp\CefSharp.Common.81.3.100\x86\CefSharp.Core.dll
+,,,,,"CefSharp.WinForms, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86",..\..\..\..\Libraries\CefSharp\CefSharp.WinForms.81.3.100\x86\CefSharp.WinForms.dll
+,,,,,"Codebook, Version=2.0.2.25076, Culture=neutral, PublicKeyToken=071f2acc6b516d38, processorArchitecture=MSIL",..\..\..\..\Libraries\Codebook\bin\Codebook.dll
+,,,,,"DevExpress.Data.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.Data.v7.2.dll
+,,,,,"DevExpress.Utils.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.Utils.v7.2.dll
+,,,,,"DevExpress.XtraEditors.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.XtraEditors.v7.2.dll
+,,,,,"DevExpress.XtraEditors.v7.2.Design, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.XtraEditors.v7.2.Design.dll
+,,,,,"DevExpress.XtraGrid.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.XtraGrid.v7.2.dll
+,,,,,"DevExpress.XtraGrid.v7.2.Design, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpress\DevExpress.XtraGrid.v7.2.Design.dll
+,,,,,"DevExpress.XtraLayout.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1",..\..\..\..\Libraries\DevExpress\DevExpress.XtraLayout.v7.2.dll
+,,,,,"DevExpress.XtraNavBar.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1",..\..\..\..\Libraries\DevExpress\DevExpress.XtraNavBar.v7.2.dll
+,,,,,"DevExpress.XtraScheduler.v7.2, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1",..\..\..\..\Libraries\DevExpress\DevExpress.XtraScheduler.v7.2.dll
+,,,,,"DevExpress.XtraScheduler.v7.2.Core, Version=7.2.5.0, Culture=neutral, PublicKeyToken=9b171c9fd64da1d1",..\..\..\..\Libraries\DevExpress\DevExpress.XtraScheduler.v7.2.Core.dll
+,,,,,"DevExpressExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\DevExpressExtensions\DevExpressExtensions\bin\DevExpressExtensions.dll
+,,,,,"FileExport, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\FileExport\FileExport\bin\FileExport.dll
+,,,,,"GdPicture.NET.10, Version=10.2.0.6, Culture=neutral, PublicKeyToken=209474a1d4ddd90e, processorArchitecture=MSIL",..\..\..\..\Libraries\GDPicture\v10\Framework 3.5\GdPicture.NET.10.dll
+,,,,,"GdPicture.NET.10.PDF, Version=3.1.0.6, Culture=neutral, PublicKeyToken=51c22536fc3bc6e1, processorArchitecture=MSIL",..\..\..\..\Libraries\GDPicture\v10\Framework 3.5\GdPicture.NET.10.PDF.dll
+,,,,,"GiftRAP.ADO.Extender, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.ADO\GiftRAP.ADO.Extender\bin\GiftRAP.ADO.Extender.dll
+,,,,,"GiftRAP.Application, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Application\bin\GiftRAP.Application.dll
+,,,,,"GiftRAP.BaseControls, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\UIFramework\BaseControls\bin\GiftRAP.BaseControls.dll
+,,,,,"GiftRAP.BaseData, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\UIFramework\BaseData\bin\GiftRAP.BaseData.dll
+,,,,,"GiftRAP.BaseForms, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\UIFramework\BaseForms\bin\GiftRAP.BaseForms.dll
+,,,,,"GiftRAP.ClassFactory, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.ClassFactory\GiftRAP.ClassFactory\bin\GiftRAP.ClassFactory.dll
+,,,,,"GiftRAP.CodeEmitter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.CodeEmitter\bin\GiftRAP.CodeEmitter.dll
+,,,,,"GiftRAP.CodeGeneration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.CodeGeneration\GiftRAP.CodeGeneration\bin\GiftRAP.CodeGeneration.dll
+,,,,,"GiftRAP.Collections, Version=1.9.0.0, Culture=neutral, PublicKeyToken=ac584f7121cea92d, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Collections\GiftRAP.Collections\bin\GiftRAP.Collections.dll
+,,,,,"GiftRAP.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e87248b9b9fe3d99, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Entity\bin\GiftRAP.Entity.dll
+,,,,,"GiftRAP.Events, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e87248b9b9fe3d99, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Events\GiftRAP.Events\bin\GiftRAP.Events.dll
+,,,,,"GiftRAP.ReportBatchPrinting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.ReportBatchPrinting\GiftRAP.ReportBatchPrinting\bin\GiftRAP.ReportBatchPrinting.dll
+,,,,,"GiftRAP.Reporting.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Reporting\GiftRAP.Reporting.Interfaces\bin\GiftRAP.Reporting.Interfaces.dll
+,,,,,"GiftRAP.Reporting.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Reporting\GiftRAP.Reporting.Model\bin\GiftRAP.Reporting.Model.dll
+,,,,,"GiftRAP.Reporting.Processing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Reporting\GiftRAP.Reporting.Processing\bin\GiftRAP.Reporting.Processing.dll
+,,,,,"GiftRAP.Reporting.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Reporting\GiftRAP.Reporting.WinForms\bin\GiftRAP.Reporting.WinForms.dll
+,,,,,"GiftRAP.RO.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Configuration\bin\GiftRAP.RO.Configuration.dll
+,,,,,"GiftRAP.RO.Controller, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\GiftRAP.RO.Controller\bin\GiftRAP.RO.Controller.dll
+,,,,,"GiftRAP.RO.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Core\bin\GiftRAP.RO.Core.dll
+,,,,,"GiftRAP.RO.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Interfaces\bin\GiftRAP.RO.Interfaces.dll
+,,,,,"GiftRAP.RO.Mapping, Version=4.14.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Mapping\bin\GiftRAP.RO.Mapping.dll
+,,,,,"GiftRAP.RO.Model, Version=3.7.0.16687, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Model\bin\GiftRAP.RO.Model.dll
+,,,,,"GiftRAP.RO.Reports, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Reports\bin\GiftRAP.RO.Reports.dll
+,,,,,"GiftRAP.RO.Rights, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\GiftRAP.RO.Rights\bin\GiftRAP.RO.Rights.dll
+,,,,,"GiftRAP.RO.ServiceProxies",..\..\Libraries\GiftRAP.RO.ServiceProxies\bin\GiftRAP.RO.ServiceProxies.dll
+,,,,,"GiftRAP.RO.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Server\GiftRAP.RO.MiddleTier\GiftRAP.RO.Validation\bin\GiftRAP.RO.Validation.dll
+,,,,,"GiftRAP.SnapshotDifferencing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.SnapshotDifferencing\GiftRAP.SnapshotDifferencing\bin\GiftRAP.SnapshotDifferencing.dll
+,,,,,"GiftRAP.Threading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Threading\bin\GiftRAP.Threading.dll
+,,,,,"GiftRAP.UI.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.UI.Controls\GiftRAP.UI.Controls\bin\GiftRAP.UI.Controls.dll
+,,,,,"GiftRAP.UserIdleTimer, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.UserIdleTimer\bin\GiftRAP.UserIdleTimer.dll
+,,,,,"GiftRAP.WCF.ChannelFactory, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.WCF.ChannelFactory\GiftRAP.WCF.ChannelFactory\bin\GiftRAP.WCF.ChannelFactory.dll
+,,,,,"GiftRAP.WCF.MessageInspection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.WCF.MessageInspection\bin\GiftRAP.WCF.MessageInspection.dll
+,,,,,"GiftRAP.WCF.Security.Exceptions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.WCF.Security\GiftRAP.WCF.Security.Exceptions\bin\GiftRAP.WCF.Security.Exceptions.dll
+,,,,,"GiftRAP.Win32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GiftRAP.Win32\GiftRAP.Win32\bin\GiftRAP.Win32.dll
+,,,,,"GZipEncoder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\GZipEncoder\bin\GZipEncoder.dll
+,,,,,"Interop.WIA",..\..\..\..\Libraries\WIA\WIA\Interop.WIA.dll
+,,,,,"Ionic.Utils.Zip, Version=1.3.0.0, Culture=neutral, PublicKeyToken=c551e179877da246, processorArchitecture=MSIL",..\..\..\..\Libraries\Ionic.Utils\1.3.0.0\Ionic.Utils.Zip.dll
+,,,,,"Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL",..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll
+,,,,,"Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL",..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll
+,,,,,"Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL",..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll
+,,,,,"Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL",..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll
+,,,,,"Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL",..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll
+,,,,,"Microsoft.VisualBasic",
+,,,,,"Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL",..\..\..\..\Libraries\NewtonsoftJson\6.0.4\Newtonsoft.Json.dll
+,,,,,"Optima.AI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.AI\bin\Optima.AI.dll
+,,,,,"Optima.BI.DTO",..\..\..\SisenseFacade\Optima.BI.DTO\bin\Optima.BI.DTO.dll
+,,,,,"Optima.Chromium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.Chromium\bin\Optima.Chromium.dll
+,,,,,"Optima.Controller",..\..\..\..\Libraries\Optima.Controller\Optima.Controller\bin\Optima.Controller.dll
+,,,,,"Optima.Copyright, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.Copyright\bin\Optima.Copyright.dll
+,,,,,"Optima.CryptoProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.CryptoProvider\Optima.CryptoProvider\bin\Optima.CryptoProvider.dll
+,,,,,"Optima.DomainModelQuery, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.DomainModelQuery\Optima.DomainModelQuery\bin\Optima.DomainModelQuery.dll
+,,,,,"Optima.EDI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.EDI\Optima.EDI\bin\Optima.EDI.dll
+,,,,,"Optima.FormBuilder",..\..\Libraries\Optima.FormBuilder\bin\Optima.FormBuilder.dll
+,,,,,"Optima.Functional",..\..\..\..\Libraries\Optima.Functional\Optima.Functional\bin\Optima.Functional.dll
+,,,,,"Optima.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.Model\Optima.Model\bin\Optima.Model.dll
+,,,,,"Optima.OASIS",..\..\Libraries\Optima.OASIS\bin\Optima.OASIS.dll
+,,,,,"Optima.PasswordReset",..\..\..\..\Libraries\Optima.PasswordReset\Optima.PasswordReset\bin\Optima.PasswordReset.dll
+,,,,,"Optima.PDF",..\..\..\..\Libraries\Optima.PDF\Optima.PDF\bin\Optima.PDF.dll
+,,,,,"Optima.Projections",..\..\Libraries\Optima.Projections\Optima.Projections\bin\Optima.Projections.dll
+,,,,,"Optima.REST",..\..\..\..\Libraries\Optima.Rest\bin\Optima.REST.dll
+,,,,,"Optima.RO.Chromium",..\..\Libraries\Optima.RO.Chromium\bin\Optima.RO.Chromium.dll
+,,,,,"Optima.RO.Client.Admin",..\..\Libraries\Optima.RO.Client.Admin\Optima.RO.Client.Admin\bin\Optima.RO.Client.Admin.dll
+,,,,,"Optima.RO.Client.Care, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.Client.Care\Optima.RO.Client.Care\bin\Optima.RO.Client.Care.dll
+,,,,,"Optima.RO.Client.ClaimsManagement",..\..\Libraries\Optima.RO.Client.ClaimsManagement\Optima.RO.Client.ClaimsManagement\bin\Optima.RO.Client.ClaimsManagement.dll
+,,,,,"Optima.RO.Client.Clinic",..\..\Libraries\Optima.RO.Client.Clinic\Optima.RO.Client.Clinic\bin\Optima.RO.Client.Clinic.dll
+,,,,,"Optima.RO.Client.ClinicalDocumentation",..\..\Libraries\Optima.RO.Client.ClinicalDocumentation\Optima.RO.Client.ClinicalDocumentation\bin\Optima.RO.Client.ClinicalDocumentation.dll
+,,,,,"Optima.RO.Client.ClinicalPathways",..\..\Libraries\Optima.RO.Client.ClinicalPathways\bin\Optima.RO.Client.ClinicalPathways.dll
+,,,,,"Optima.RO.Client.Common, Version=5.2.1.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.Client.Common\Optima.RO.Client.Common\bin\Optima.RO.Client.Common.dll
+,,,,,"Optima.RO.Client.Communication",..\..\Libraries\Optima.RO.Client.Communication\Optima.RO.Client.Communication\bin\Optima.RO.Client.Communication.dll
+,,,,,"Optima.RO.Client.Core",..\..\Libraries\Optima.RO.Client.Core\Optima.RO.Client.Core\bin\Optima.RO.Client.Core.dll
+,,,,,"Optima.RO.Client.DailyActivityLog",..\..\Libraries\Optima.RO.Client.DailyActivityLog\Optima.RO.Client.DailyActivityLog\bin\Optima.RO.Client.DailyActivityLog.dll
+,,,,,"Optima.RO.Client.DataAccess",..\..\Libraries\Optima.RO.Client.DataAccess\Optima.RO.Client.DataAccess\bin\Optima.RO.Client.DataAccess.dll
+,,,,,"Optima.RO.Client.FormBuilder",..\..\Libraries\Optima.RO.Client.FormBuilder\bin\Optima.RO.Client.FormBuilder.dll
+,,,,,"Optima.RO.Client.GLExport",..\..\Libraries\Optima.RO.Client.GLExport\bin\Optima.RO.Client.GLExport.dll
+,,,,,"Optima.RO.Client.HomeCare",..\..\Libraries\Optima.RO.Client.HomeCare\Optima.RO.Client.HomeCare\bin\Optima.RO.Client.HomeCare.dll
+,,,,,"Optima.RO.Client.ImageLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.Client.ImageLibrary\bin\Optima.RO.Client.ImageLibrary.dll
+,,,,,"Optima.RO.Client.Messaging",..\..\Libraries\Optima.RO.Client.Messaging\Optima.RO.Client.Messaging\bin\Optima.RO.Client.Messaging.dll
+,,,,,"Optima.RO.Client.PayerVerification",..\..\Libraries\Optima.RO.Client.PayerVerification\Optima.RO.Client.PayerVerification\bin\Optima.RO.Client.PayerVerification.dll
+,,,,,"Optima.RO.Client.PDPM",..\..\Libraries\Optima.RO.Client.PDPM\bin\Optima.RO.Client.PDPM.dll
+,,,,,"Optima.RO.Client.PhysiciansPortal",..\..\Libraries\Optima.RO.Client.PhysiciansPortal\Optima.RO.Client.PhysiciansPortal\bin\Optima.RO.Client.PhysiciansPortal.dll
+,,,,,"Optima.RO.Client.Projections",..\..\Libraries\Optima.RO.Client.Projections\Optima.RO.Client.Projections\bin\Optima.RO.Client.Projections.dll
+,,,,,"Optima.RO.Client.Reporting",..\..\Libraries\Optima.RO.Client.Reporting\Optima.RO.Client.Reporting\bin\Optima.RO.Client.Reporting.dll
+,,,,,"Optima.RO.Client.Scheduling",..\..\Libraries\Optima.RO.Client.Scheduling\Optima.RO.Client.Scheduling\bin\Optima.RO.Client.Scheduling.dll
+,,,,,"Optima.RO.Client.Setup",..\..\Libraries\Optima.RO.Client.Setup\Optima.RO.Client.Setup\bin\Optima.RO.Client.Setup.dll
+,,,,,"Optima.RO.Client.Therapy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.Client.Therapy\Optima.RO.Client.Therapy\bin\Optima.RO.Client.Therapy.dll
+,,,,,"Optima.RO.Client.UI.Common",..\..\Libraries\Optima.RO.Client.UI.Common\Optima.RO.Client.UI.Common\bin\Optima.RO.Client.UI.Common.dll
+,,,,,"Optima.RO.Client.Workflow",..\..\Libraries\Optima.RO.Client.Workflow\Optima.RO.Client.Workflow\bin\Optima.RO.Client.Workflow.dll
+,,,,,"Optima.RO.Client.Workplace",..\..\Libraries\Optima.RO.Client.Workplace\Optima.RO.Client.Workplace\bin\Optima.RO.Client.Workplace.dll
+,,,,,"Optima.RO.Client.ZoneCare",..\..\Libraries\Optima.RO.Client.ZoneCare\Optima.RO.Client.ZoneCare\bin\Optima.RO.Client.ZoneCare.dll
+,,,,,"Optima.RO.DomainModelFilters, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.DomainModelFilters\Optima.RO.DomainModelFilters\bin\Optima.RO.DomainModelFilters.dll
+,,,,,"Optima.RO.EDI",..\..\Libraries\Optima.RO.EDI\Optima.RO.EDI\bin\Optima.RO.EDI.dll
+,,,,,"Optima.RO.Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\Libraries\Optima.RO.Proxy\Optima.RO.Proxy\bin\Optima.RO.Proxy.dll
+,,,,,"Optima.Scanner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",
+,,,,,"Optima.UISynchronization",..\..\..\..\Libraries\Optima.UISynchronization\Optima.UISynchronization\bin\Optima.UISynchronization.dll
+,,,,,"Optima.WCF.Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.WCF.Proxy\Optima.WCF.Proxy\bin\Optima.WCF.Proxy.dll
+,,,,,"Optima.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\Optima.Windows\bin\Optima.Windows.dll
+,,,,,"PropertyGridBinding, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\PropertyGridBinding\PropertyGridBinding\bin\PropertyGridBinding.dll
+,,,,,"PropertyGridUIExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL",..\..\..\..\Libraries\PropertyGridUIExtensions\PropertyGridUIExtensions\bin\PropertyGridUIExtensions.dll
+,,,,,"SandDock, Version=2.4.0.1, Culture=neutral, PublicKeyToken=75b7ec17dd7c14c3, processorArchitecture=MSIL",..\..\..\..\Libraries\Divelements\SandDock\2.4.0.1\SandDock.dll
+,,,,,"System",
+,,,,,"System.configuration",
+,,,,,"System.Core",
+,,,,,"System.Data",
+,,,,,"System.Data.DataSetExtensions",
+,,,,,"System.Deployment",
+,,,,,"System.Design",
+,,,,,"System.DirectoryServices",
+,,,,,"System.Drawing",
+,,,,,"System.IdentityModel",
+,,,,,"System.IO.Compression.FileSystem",
+,,,,,"System.Messaging",
+,,,,,"System.Runtime.Serialization",
+,,,,,"System.Security",
+,,,,,"System.ServiceModel",
+,,,,,"System.Web",
+,,,,,"System.Web.Extensions",
+,,,,,"System.Web.Services",
+,,,,,"System.Windows.Forms",
+,,,,,"System.Xml",
+,,,,,"WIA",..\..\..\..\Libraries\WIA\WIA\bin\WIA.dll
+./TestDir/ProjectA/ProjectC/Optima.Http.csproj,,csproj,Optima.Http,v4.5.2,"",""
+,,,,,"System",
+,,,,,"System.Core",
+,,,,,"System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL",..\..\Microsoft\AspNet.Mvc\4.0.4\System.Net.Http.dll
+,,,,,"System.ServiceModel",
+,,,,,"System.Web",
+,,,,,"System.Xml.Linq",
+,,,,,"System.Data.DataSetExtensions",
+,,,,,"Microsoft.CSharp",
+,,,,,"System.Data",
+,,,,,"System.Xml",
